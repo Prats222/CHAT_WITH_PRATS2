@@ -9,8 +9,7 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const path= require("path");
 
 const corsOptions = {
-  // origin: 'https://chatwithprats.onrender.com',
- origin: '*', 
+   origin: 'https://chatwithprats.onrender.com',
   optionsSuccessStatus: 200, // Some legacy browsers (IE11) choke on 204
 };
 
