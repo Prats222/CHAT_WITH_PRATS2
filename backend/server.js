@@ -8,10 +8,15 @@ const messageRoutes = require('./routes/messageRoutes')
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const path= require("path");
 
+const corsOptions = {
+  origin: 'https://chatwithprats.onrender.com', // Replace with your site's domain
+  optionsSuccessStatus: 200, // Some legacy browsers (IE11) choke on 204
+};
+
 dotenv.config();
 const app= express();
 connectDB();
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
