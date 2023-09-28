@@ -13,7 +13,6 @@ import Lottie from "react-lottie";
 import animationData from "../animations/typing.json";
 import { BiSolidSend} from 'react-icons/bi'
 import io from "socket.io-client";
-const socket = io("https://chatwithprats.onrender.com");
 import UpdateGroupChatModal from "./miscellaneous/UpdategroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
 const ENDPOINT = "http://localhost:5000"; // 
