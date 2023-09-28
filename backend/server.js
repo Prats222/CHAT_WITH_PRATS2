@@ -8,10 +8,10 @@ const messageRoutes = require('./routes/messageRoutes')
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const path= require("path");
 
-const corsOptions = {
-  origin: 'https://chatwithprats.onrender.com', // Replace with your site's domain
-  optionsSuccessStatus: 200, // Some legacy browsers (IE11) choke on 204
-};
+// const corsOptions = {
+//   origin: 'https://chatwithprats.onrender.com', // Replace with your site's domain
+//   optionsSuccessStatus: 200, // Some legacy browsers (IE11) choke on 204
+// };
 
 dotenv.config();
 const app= express();
@@ -53,7 +53,9 @@ const server= app.listen(PORT,console.log(`server on ${PORT}`.yellow.bold));
 const io= require('socket.io')(server,{
     pingTimeout:60000,
     cors:{
-        origin:"http://localhost:3000",
+        // origin:"http://localhost:3000",
+     origin: 'https://chatwithprats.onrender.com',
+  optionsSuccessStatus: 200,
     }
 });
 
