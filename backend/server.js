@@ -16,7 +16,7 @@ const path= require("path");
 dotenv.config();
 const app= express();
 connectDB();
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use(express.json());
 
