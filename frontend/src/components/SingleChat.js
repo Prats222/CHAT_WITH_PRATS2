@@ -136,7 +136,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       }
     });
     // eslint-disable-next-line
-  }, []);
+    return () => {
+      socket.disconnect(); // Disconnect the socket when the component unmounts
+    };
+  }, [selectedChat._id])
+  // }, []);
 
   useEffect(() => {
     fetchMessages();
