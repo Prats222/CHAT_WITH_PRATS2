@@ -29,7 +29,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
 
-  
+  const startTypingAnimation = () => {
+    setIsTyping(true);
+    socket.emit('start typing', selectedChat._id); // Emit typing start event
+  };
+
+  const stopTypingAnimation = () => {
+    setIsTyping(false);
+    socket.emit('stop typing', selectedChat._id); // Emit typing stop event
+  };
+
  
   const defaultOptions = {
     loop: true,
@@ -112,9 +121,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
-    socket.on("typing", () => setIsTyping(true));
-    socket.on("stop typing", () => setIsTyping(false));
+    // socket.on("typing", () => setIsTyping(true));
+    // socket.on("stop typing", () => setIsTyping(false));
+    socket.on('start typing', (chatId) => {
+      if (chatId === selectedChat._id) {
+        setIsTyping(true);
+      }
+    });
 
+    // Listen for typing stop event from other users
+     socket.on('stop typing', (chatId) => {
+      if (chatId === selectedChat._id) {
+        setIsTyping(false);
+      }
+    });
     // eslint-disable-next-line
   }, []);
 
@@ -274,7 +294,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   <Lottie
                     options={defaultOptions}
                     // height={50}
-                    className={istyping ? 'typing-animation' : ''}
+                    className={istyping && <div className="typing-indicator" /> ? }
                     width={70}
                     style={{ marginBottom: 15, marginLeft: 0 }}
                   />
@@ -289,7 +309,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={typingHandler}
-             
+              onFocus={startTypingAnimation}
+        onBlur={stopTypingAnimation}
                       />
               <IconButton
     colorScheme="blue" // Set the button color scheme to blue
