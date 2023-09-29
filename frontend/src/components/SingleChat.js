@@ -274,6 +274,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   <Lottie
                     options={defaultOptions}
                     // height={50}
+                    className={istyping ? 'typing-animation' : ''}
                     width={70}
                     style={{ marginBottom: 15, marginLeft: 0 }}
                   />
