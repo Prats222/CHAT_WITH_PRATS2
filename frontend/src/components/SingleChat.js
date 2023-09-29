@@ -29,28 +29,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
 
-   const startTypingAnimation = () => {
-    setIsTyping(true);
-  };
-
-  // Function to stop the typing animation
-  const stopTypingAnimation = () => {
-    setIsTyping(false);
-  };
-const startTyping = () => {
-  if (!isTyping) {
-    socket.emit("typing", selectedChat._id);
-    setIsTyping(true);
-  }
-};
-
- const stopTyping = () => {
-  if (isTyping) {
-    socket.emit("stop typing", selectedChat._id);
-    setIsTyping(false);
-  }
-};
-
+  
  
   const defaultOptions = {
     loop: true,
@@ -290,7 +269,7 @@ const startTyping = () => {
               mt={3}
               color={"white"}
             >
-              {istyping  && <div className="typing-indicator" /> ? (
+              {istyping ? (
                 <div>
                   <Lottie
                     options={defaultOptions}
@@ -309,8 +288,7 @@ const startTyping = () => {
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={typingHandler}
-                onFocus={startTypingAnimation}
-        onBlur={stopTypingAnimation}
+             
                       />
               <IconButton
     colorScheme="blue" // Set the button color scheme to blue
